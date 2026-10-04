@@ -2,11 +2,6 @@
 
 ## Added
 
-- Initialize Spring
-- CHANGELOG.md
-- LICENSE
-
-## Documentation
-
-- README.md
-- New logo
+- New models system
+- User model
+- Hash library
