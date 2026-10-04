@@ -7,7 +7,7 @@
     </a>
 </p>
 <p align="center">
-    <a href="/releases/tag/v0.0.0"><img src="https://img.shields.io/badge/v0.0.0-green?style=for-the-badge&label=VERSION"></a>
+    <a href="/releases/tag/v0.1.0"><img src="https://img.shields.io/badge/v0.1.0-green?style=for-the-badge&label=VERSION"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/GPL%203.0-yellow?style=for-the-badge&label=LICENSE"></a>
     <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/keep%20a%20changelog-red?style=for-the-badge&label=changelog"></a>
 </p>
@@ -32,3 +32,28 @@
 
 - Java 17
 - Apache Maven 3.9.16
+
+## Usage
+
+### Users
+
+| Method   | Endpoint      | Description       |
+| -------- | ------------- | ----------------- |
+| `GET`    | `/users`      | Get all users     |
+| `GET`    | `/user/:name` | Get especifi user |
+| `POST`   | `/user`       | Create new user   |
+| `PUT`    | `/user`       | Update user       |
+| `DELETE` | `/user`       | Delete user       |
+
+#### Tokens
+
+Tokens are a fundamental part of the authentication process. They are generated via login and serve as credentials for authenticating the user.
+
+It uses the `Authorization` header to pass the token.
+
+| Method   | Endpoint  | Description                                 |
+| -------- | --------- | ------------------------------------------- |
+| `GET`    | `/tokens` | Get all tokens                              |
+| `POST`   | `/login`  | Create token                                |
+| `DELETE` | `/token`  | Delete specific token                       |
+| `DELETE` | `/logout` | Delete token used in `Authorization` header |
