@@ -4,3 +4,4 @@
 
 - Initialize Spring
 - CHANGELOG.md
+- LICENSE
