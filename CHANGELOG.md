@@ -3,3 +3,4 @@
 ## Added
 
 - Role module
+- Group module
