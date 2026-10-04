@@ -3,7 +3,9 @@ package com.example.chatychat.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.chatychat.utils.Hash;;
+import com.example.chatychat.utils.Hash;
+import com.example.chatychat.utils.Views;
+import com.fasterxml.jackson.annotation.JsonView;;
 
 /**
  * 
@@ -12,9 +14,16 @@ import com.example.chatychat.utils.Hash;;
  */
 public class UserModel extends Model {
 
+    @JsonView(Views.Public.class)
     private String name;
+
+    @JsonView(Views.Private.class)
     private String password;
+
+    @JsonView(Views.Public.class)
     private String pgp;
+
+    @JsonView(Views.Private.class)
     private List<String> token;
 
     /**
@@ -178,6 +187,34 @@ public class UserModel extends Model {
     @Override
     public String toString() {
         return getName() + " " + getPassword() + " " + getPgp();
+    }
+
+    /**
+     * compare 2 users
+     * 
+     * @param obj user
+     * @return if name is equal
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof UserModel other)) {
+            return false;
+        }
+        return this.name.equals(other.name);
+    }
+
+    /**
+     * (non-Javadoc)
+     * set funtional
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 
 }
