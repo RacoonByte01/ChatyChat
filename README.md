@@ -7,7 +7,7 @@
     </a>
 </p>
 <p align="center">
-    <a href="/releases/tag/v0.1.0"><img src="https://img.shields.io/badge/v0.1.0-green?style=for-the-badge&label=VERSION"></a>
+    <a href="https://github.com/RacoonByte01/ChatyChat/releases/tag/v0.2.0"><img src="https://img.shields.io/badge/v0.2.0-green?style=for-the-badge&label=VERSION"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/GPL%203.0-yellow?style=for-the-badge&label=LICENSE"></a>
     <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/keep%20a%20changelog-red?style=for-the-badge&label=changelog"></a>
 </p>
@@ -33,6 +33,22 @@
 - Java 17
 - Apache Maven 3.9.16
 
+## Installation
+
+Clone the repository and launch it with this command:
+
+```sh
+git clone https://github.com/RacoonByte01/ChatyChat.git
+cd ChatyChat
+./mvnw spring-boot:run
+```
+
+Or build it as a .jar with:
+
+```sh
+./mvnw clean package
+```
+
 ## Usage
 
 ### Users
@@ -57,3 +73,41 @@ It uses the `Authorization` header to pass the token.
 | `POST`   | `/login`  | Create token                                |
 | `DELETE` | `/token`  | Delete specific token                       |
 | `DELETE` | `/logout` | Delete token used in `Authorization` header |
+
+## Groups
+
+Groups are used to organize users and store the roles assigned to them.
+
+| Method   | Endpoint           | Description                               |
+| -------- | ------------------ | ----------------------------------------- |
+| `GET`    | `/groups`          | Get all groups the user belongs to        |
+| `GET`    | `/group/:id`       | Get specific group the user belongs to    |
+| `POST`   | `/group`           | Create new group _(user is set as admin)_ |
+| `POST`   | `/group/:id`       | Add user to the group                     |
+| `PUT`    | `/group/:id`       | Update group                              |
+| `PUT`    | `/group/:id/:name` | Update role of specific user              |
+| `DELETE` | `/group/:id`       | Delete specific group                     |
+| `DELETE` | `/group/exit/:id`  | Delete your user of specific group        |
+| `DELETE` | `/group/:id/:name` | Delete specific user                      |
+
+### Roles
+
+Roles are used to restrict or grant access to other users.
+
+This number is converted to binary, and depending on whether a bit is enabled or disabled, a specific action will be allowed or denied.
+
+| Bit | Value | Action       | Description                     |
+| --- | ----- | ------------ | ------------------------------- |
+| `0` | `1`   | Read         | Allow read the group            |
+| `1` | `2`   | Write        | Allow write to the group        |
+| `2` | `4`   | Add user     | Allow add users to the group    |
+| `3` | `8`   | Update roles | Allow update other users roles  |
+| `4` | `16`  | Delete user  | Allow remove users from a group |
+| `5` | `32`  | Update group | Allow update the group          |
+| `6` | `64`  | Delete group | Allow delete the group          |
+
+> [!NOTE]
+>
+> A user with role `0` has **no management permissions** and cannot perform any group actions beyond the permissions granted by the group.
+>
+> A user with role `127` has **full management permissions** and can manage the group with the same level of control as an administrator.
