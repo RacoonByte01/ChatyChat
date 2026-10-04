@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonView;;
 /**
  * 
  * UserModel
- * 
  */
 public class UserModel extends Model {
 

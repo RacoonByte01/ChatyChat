@@ -11,9 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * 
  * Savemodels
- * 
- * @version 0.1.0
- * @author Racoonbyte01
  */
 public class Files4Models {
 

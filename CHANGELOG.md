@@ -18,3 +18,6 @@
 
 - README usage of user
 - README usage of token
+- Delete `@version`
+- Delete `@author`
+- Delete `@since`

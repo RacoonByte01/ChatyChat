@@ -3,7 +3,6 @@ package com.example.chatychat.utils;
 /**
  * 
  * Views
- * 
  */
 public class Views {
 

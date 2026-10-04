@@ -6,8 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * 
  * ChatychatApplication
- * 
- * @author Racoonbyte01
  */
 @SpringBootApplication
 public class ChatychatApplication {

@@ -25,7 +25,6 @@ import com.example.chatychat.utils.Views;
 /**
  * 
  * UserController
- * 
  */
 @RestController
 public class UserController {
