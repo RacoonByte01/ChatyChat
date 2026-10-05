@@ -16,7 +16,8 @@ public class Files4Models {
 
     public static ObjectMapper MAPER = new ObjectMapper();
     public static String USERSFILE = "data/users.json";
-    public static String GROUPSFILE = "data/group.json";
+    public static String GROUPSFILE = "data/groups.json";
+    public static String MESSAGESPATH = "data/groups/";
 
     /**
      * save the var in a file

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.chatychat.models.UserModel;
 import com.example.chatychat.utils.Files4Models;
 import com.example.chatychat.models.GroupModel;
+import com.example.chatychat.models.MessageModel;
 import com.example.chatychat.models.RoleModel;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -233,6 +234,63 @@ public class GroupController {
     // ## End Delete
     // # End Group
 
+    // # Begin Messages
+    // ## Begin GETs
+
+    /**
+     * get all messages
+     * 
+     * @param id            of gorup
+     * @param authorization of user
+     * @return all messages
+     */
+    @GetMapping("/messages/{id}")
+    public List<MessageModel> getMessages(
+            @PathVariable long id,
+            @RequestHeader("Authorization") String authorization) {
+        List<GroupModel> groups = getAllGroups();
+        UserModel user = getUserLogin(authorization);
+        GroupModel group = groupById(groups, id);
+        if (isUserInGroup(user, group) && RoleModel.isBitOn((byte) 0,
+                group.getUserRoles(user))) {
+            return getAllMessages(id);
+        }
+        return null;
+    }
+
+    // ## End GETs
+    // ## Begin POSTs
+
+    /**
+     * post new messages
+     * 
+     * @param id            of group
+     * @param message       to post
+     * @param authorization of user
+     */
+    @PostMapping("/send/{id}")
+    public void postMessages(
+            @PathVariable long id,
+            @RequestParam(required = true) String message,
+            @RequestHeader("Authorization") String authorization) {
+        List<GroupModel> groups = getAllGroups();
+        UserModel user = getUserLogin(authorization);
+        GroupModel group = groupById(groups, id);
+        if (isUserInGroup(user, group) && RoleModel.isBitOn((byte) 1,
+                group.getUserRoles(user))) {
+            List<MessageModel> messages = null;
+            MessageModel newMessage = new MessageModel(message);
+            if (newMessage.getContent() != null) {
+                messages = getAllMessages(id);
+                messages.add(newMessage);
+                saveMessages(messages, id);
+            }
+        }
+    }
+
+    // ## End POSTs
+    // # End Messages
+
     // # Begin Misc
 
     /**
@@ -289,9 +347,34 @@ public class GroupController {
                 });
     }
 
+    /**
+     * get all messages of group
+     * 
+     * @param id of group
+     * @return all messages of gorup
+     */
+    public static List<MessageModel> getAllMessages(long id) {
+        return Files4Models.loadFile(
+                Files4Models.MAPER,
+                Files4Models.MESSAGESPATH + id + ".json",
+                new TypeReference<List<MessageModel>>() {
+                });
+    }
+
     public static void saveGroups(List<GroupModel> groups) {
         Files4Models.saveFile(Files4Models.MAPER, groups, Files4Models.GROUPSFILE);
     }
 
+    /**
+     * save messages
+     * 
+     * @param messages to save
+     * @param id       of gorup
+     */
+    public static void saveMessages(List<MessageModel> messages, long id) {
+        Files4Models.saveFile(Files4Models.MAPER, messages, Files4Models.MESSAGESPATH + id + ".json");
+    }
+
     // # End Misc
+
 }

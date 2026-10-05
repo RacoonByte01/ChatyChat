@@ -3,7 +3,9 @@
 ## Added
 
 - Message model
+- Message requests
+- Path of messages
 
 ## Fix
 
-- Message model date parse to `String`
+- Message model transform to `String`

@@ -9,8 +9,7 @@ import java.util.Set;
  */
 public class MessageModel extends Model {
 
-    private String content;
-    private LocalDateTime date_post;
+    private String content, date_post;
 
     /**
      * basic constructor to save file
@@ -25,7 +24,7 @@ public class MessageModel extends Model {
      */
     public MessageModel(String content) {
         setContent(content);
-        date_post = LocalDateTime.now();
+        date_post = LocalDateTime.now().toString();
     }
 
     /**
@@ -66,7 +65,9 @@ public class MessageModel extends Model {
     private boolean isPGP(String content) {
         Set<String> indicators = Set.of(
                 "-----BEGIN PGP PUBLIC KEY BLOCK-----",
-                "-----BEGIN PGP PRIVATE KEY BLOCK-----");
+                "-----BEGIN PGP PRIVATE KEY BLOCK-----",
+                "-----BEGIN PGP MESSAGE-----",
+                "-----END PGP MESSAGE-----");
 
         return indicators.stream()
                 .anyMatch(content::contains);
