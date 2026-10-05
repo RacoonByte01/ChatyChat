@@ -42,8 +42,8 @@ public class MessageModel extends Model {
      * 
      * @return date
      */
-    public LocalDateTime getDate_post() {
-        return date_post;
+    public String getDate_post() {
+        return date_post.toString();
     }
 
     /**
