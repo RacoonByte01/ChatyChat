@@ -7,7 +7,7 @@
     </a>
 </p>
 <p align="center">
-    <a href="https://github.com/RacoonByte01/ChatyChat/releases/tag/v0.2.0"><img src="https://img.shields.io/badge/v0.2.0-green?style=for-the-badge&label=VERSION"></a>
+    <a href="https://github.com/RacoonByte01/ChatyChat/releases/tag/v1.0.0"><img src="https://img.shields.io/badge/v1.0.0-green?style=for-the-badge&label=VERSION"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/GPL%203.0-yellow?style=for-the-badge&label=LICENSE"></a>
     <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/keep%20a%20changelog-red?style=for-the-badge&label=changelog"></a>
 </p>
@@ -111,3 +111,10 @@ This number is converted to binary, and depending on whether a bit is enabled or
 > A user with role `0` has **no management permissions** and cannot perform any group actions beyond the permissions granted by the group.
 >
 > A user with role `127` has **full management permissions** and can manage the group with the same level of control as an administrator.
+
+### Messages
+
+| Method | Endpoint        | Description                        |
+| ------ | --------------- | ---------------------------------- |
+| `GET`  | `/messages/:id` | Get all messages of a group        |
+| `POST` | `/send/:id`     | Get all groups the user belongs to |
